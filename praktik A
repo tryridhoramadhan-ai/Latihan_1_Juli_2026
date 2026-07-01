@@ -1,0 +1,22 @@
+# bubble_A.py
+A = [27, 3, 14, 4, 20, 81, 3, 26, 14, 22, 33, 18, 3, 21, 12, 1]
+
+print("Array awal :", A)
+
+# Pause sebelum mulai
+input("\nTekan Enter untuk memulai Bubble Sort pada List A...")
+
+n = len(A)
+print(" + " * 40)
+
+for i in range(n - 1):
+    print(f"\n=== Putaran {i + 1} ===")
+    for j in range(n - i - 1):
+        print(f"\nMembandingkan A[{j}] = {A[j]} dengan A[{j+1}] = {A[j+1]}")
+        if A[j] > A[j + 1]:
+            print(f"{A[j]} lebih besar dari {A[j+1]}")
+            print("-> Tukar posisi")
+            A[j], A[j + 1] = A[j + 1], A[j]
+        print("Array sekarang :", A)
+
+print("\nList A terurut :", A)

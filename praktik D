@@ -1,0 +1,22 @@
+# bubble_D.py
+D = [18, 17, 8, 45, 1, 21, 100, 212, 300, 699, 888, 3, 5, 7, 12, 3, 67, 21, 18, 190000000]
+
+print("Array awal :", D)
+
+# Pause sebelum mulai
+input("\nTekan Enter untuk memulai Bubble Sort pada List D...")
+
+n = len(D)
+print("\n" + "-" * 40)
+
+for i in range(n - 1):
+    print(f"\n=== Putaran {i + 1} ===")
+    for j in range(n - i - 1):
+        print(f"\nMembandingkan D[{j}] = {D[j]} dengan D[{j+1}] = {D[j+1]}")
+        if D[j] > D[j + 1]:
+            print(f"{D[j]} lebih besar dari {D[j+1]}")
+            print("-> Tukar posisi")
+            D[j], D[j + 1] = D[j + 1], D[j]
+        print("Array sekarang :", D)
+
+print("\nList D terurut :", D)
