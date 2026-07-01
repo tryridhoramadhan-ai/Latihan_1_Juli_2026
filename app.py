@@ -39,7 +39,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(auth.router)
 app.include_router(profile.router)
 
-
 # ── HALAMAN UTAMA ──────────────────────────────────────────
 # Kalau user buka http://localhost:8000, redirect ke halaman login
 from fastapi.responses import RedirectResponse

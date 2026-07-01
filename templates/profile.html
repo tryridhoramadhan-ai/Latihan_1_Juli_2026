@@ -1,106 +1,51 @@
 {% extends "base.html" %}
 
-{% block title %}Profil - {{ user.username }}{% endblock %}
+{% block title %}Program Ekstrakurikuler Sepak Bola{% endblock %}
 
 {% block content %}
 <div class="card card-wide">
-    <h1>Profil Saya</h1>
-    <p class="subtitle">Kelola informasi akun Anda</p>
-
-    {# Pesan sukses setelah update #}
-    {% if request.query_params.get('updated') %}
-    <div class="alert alert-success">Profil berhasil diperbarui!</div>
-    {% endif %}
-
-    {# Pesan error upload foto #}
-    {% if photo_error %}
-    <div class="alert alert-error">⚠️ {{ photo_error }}</div>
-    {% endif %}
-
-    {# ── FOTO PROFIL ── #}
-    <div style="text-align:center; margin-bottom: 20px;">
-        {% if user.photo %}
-            {# Tampilkan foto kalau sudah ada #}
-            <img src="/static/uploads/{{ user.photo }}"
-                 alt="Foto Profil"
-                 style="width:100px; height:100px; border-radius:50%; object-fit:cover;
-                        border: 3px solid #4f46e5;">
-        {% else %}
-            {# Avatar default kalau belum ada foto #}
-            <div style="width:100px; height:100px; border-radius:50%; background:#e0e7ff;
-                        display:inline-flex; align-items:center; justify-content:center;
-                        font-size:2.5rem;">
-                👤
-            </div>
-        {% endif %}
-        <p style="margin-top:8px; color:#666; font-size:0.85rem;">
-            @{{ user.username }}
-        </p>
+    <div class="hero-card">
+        <h1 style="text-align:left; color:white; margin-bottom:8px;">Program Ekstrakurikuler Sepak Bola</h1>
+        <p style="margin:0; opacity:0.95;">Selamat datang, {{ user.full_name or user.username }}!</p>
     </div>
 
-    {# ── UPLOAD FOTO ── #}
-    <div class="section-title">Upload Foto Profil</div>
+    <div class="contact-box" style="margin-bottom:20px;">
+        <div class="section-title">Kontak Person</div>
+        <p><strong>Pelatih:</strong> Bapak Dedi - 0812-3456-7890</p>
+        <p><strong>Koordinator:</strong> Ibu Lina - 0823-4567-8901</p>
+    </div>
 
-    {# enctype="multipart/form-data" WAJIB untuk upload file #}
-    <form action="/profile/{{ user.id }}/upload-photo"
-          method="post"
-          enctype="multipart/form-data">
-
-        <div class="form-group">
-            <input type="file" name="photo" accept="image/*"
-                   style="width:100%; padding:8px; border:1.5px solid #ddd;
-                          border-radius:8px; font-size:0.9rem;">
+    <div class="section-title">Jadwal Latihan</div>
+    <div class="schedule-list">
+        <div class="schedule-item">
+            <strong>Senin</strong><br>
+            Pukul 15:30 - 17:00 WIB | Latihan teknik dasar dan passing
         </div>
-
-        <button type="submit" class="btn btn-secondary">Upload Foto</button>
-    </form>
-
-    <hr class="divider">
-
-    {# ── EDIT PROFIL ── #}
-    <div class="section-title">Edit Informasi Profil</div>
-
-    <form action="/profile/{{ user.id }}/edit" method="post">
-
-        <div class="form-group">
-            <label>Nama Lengkap</label>
-            {# value="{{ user.full_name or '' }}" → isi dengan data saat ini #}
-            <input type="text" name="full_name"
-                   value="{{ user.full_name or '' }}"
-                   placeholder="Nama lengkap Anda">
+        <div class="schedule-item">
+            <strong>Rabu</strong><br>
+            Pukul 15:30 - 17:00 WIB | Latihan dribbling dan kontrol bola
         </div>
-
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email"
-                   value="{{ user.email }}"
-                   placeholder="Email Anda">
+        <div class="schedule-item">
+            <strong>Jumat</strong><br>
+            Pukul 15:30 - 17:00 WIB | Latihan strategi dan simulasi pertandingan
         </div>
-
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-    </form>
-
-    <hr class="divider">
-
-    {# ── INFO AKUN (READ) ── #}
-    <div class="section-title">Informasi Akun</div>
-    <div style="background:#f9fafb; border-radius:8px; padding:14px; font-size:0.9rem; color:#555;">
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p style="margin-top:6px;"><strong>Email:</strong> {{ user.email }}</p>
-        <p style="margin-top:6px;"><strong>Nama:</strong> {{ user.full_name or '-' }}</p>
-        <p style="margin-top:6px;"><strong>ID:</strong> #{{ user.id }}</p>
+        <div class="schedule-item">
+            <strong>Minggu</strong><br>
+            Pukul 08:00 - 10:00 WIB | Latihan gabungan dan evaluasi tim
+        </div>
     </div>
 
     <hr class="divider">
 
-    {# ── LOGOUT & HAPUS AKUN ── #}
+    <div class="section-title">Informasi Tambahan</div>
+    <p style="color:#4b5563; line-height:1.6;">
+        Semua peserta diwajibkan memakai seragam olahraga, membawa air minum, dan hadir 10 menit sebelum latihan dimulai.
+    </p>
+
+    <hr class="divider">
+
     <a href="/logout">
         <button type="button" class="btn btn-secondary">Logout</button>
     </a>
-
-    <form action="/profile/{{ user.id }}/delete" method="post"
-          onsubmit="return confirm('Yakin ingin hapus akun? Tindakan ini tidak bisa dibatalkan!')">
-        <button type="submit" class="btn btn-danger">Hapus Akun</button>
-    </form>
 </div>
 {% endblock %}

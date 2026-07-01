@@ -37,3 +37,21 @@ class User(Base):
 
     # Nama file foto profil. Kosong kalau belum upload.
     photo = Column(String, nullable=True)
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
+
+class EmergencyContact(Base):
+    __tablename__ = "emergency_contacts"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    name = Column(String, nullable=False)
+
+    relationship_name = Column(String)
+
+    phone = Column(String)
+
+    user = relationship("User")

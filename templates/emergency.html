@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card card-wide">
+
+<h1>Kontak Darurat</h1>
+
+<form action="/emergency/{{user_id}}/add" method="post">
+
+<div class="form-group">
+<label>Nama</label>
+<input type="text" name="name">
+</div>
+
+<div class="form-group">
+<label>Hubungan</label>
+<input type="text" name="relationship_name">
+</div>
+
+<div class="form-group">
+<label>No HP</label>
+<input type="text" name="phone">
+</div>
+
+<button class="btn btn-primary">
+Tambah
+</button>
+
+</form>
+
+<hr>
+
+<h2>Daftar Kontak</h2>
+
+{% for c in contacts %}
+
+<div style="margin-bottom:20px">
+
+<b>{{c.name}}</b>
+
+<br>
+
+{{c.relationship_name}}
+
+<br>
+
+{{c.phone}}
+
+<form action="/emergency/delete/{{c.id}}" method="post">
+
+<button class="btn btn-danger">
+
+Hapus
+
+</button>
+
+</form>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
